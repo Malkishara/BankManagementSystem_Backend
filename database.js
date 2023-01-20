@@ -25,16 +25,17 @@ if(err){
 })
 
 app.get("/login",(req,res)=>{
-    con.query("select emp_email,emp_password from Employee",function(err,result,fields){
+    con.query("SELECT  emp_email, emp_password FROM employee",function(err,result,fields){
         if(err){
             console.log(err);
         }else{
-           // res.send(result);
+            //res.send(result);
+            
            data=JSON.parse(JSON.stringify(result));
            console.log(data);
-           console.log(data[1].emp_password);
-           console.log("Successful")
-        }
+           res.send(data);
+           console.log(data[1]);
+         }
     });
 })
 
