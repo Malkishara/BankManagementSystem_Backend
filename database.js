@@ -1,21 +1,12 @@
-// const {createPool} =require('mysql');
-
-// const pool=createPool({
-//     host:"localhost",
-//     user:"root",
-//     password:"",
-//     connectionLimit:10
-// })
- 
-
-// pool.query("select emp_email,emp_password from banks.Employee",(err,res)=>{
-//     return console.log(res);
-// })
 
 const express=require('express');
 const mysql=require('mysql');
 const app=express();
 const PORT =3000;
+const cors=require('cors');
+
+//app.use(express.json);
+app.use(cors());
 
 const con=mysql.createConnection({
     host:"localhost",
@@ -42,8 +33,13 @@ app.get("/login",(req,res)=>{
            data=JSON.parse(JSON.stringify(result));
            console.log(data);
            console.log(data[1].emp_password);
+           console.log("Successful")
         }
     });
+})
+
+app.get("/",(req,res)=>{
+    res.json({"users":["user1","user2","user3"]})
 })
 
 app.get("/emp_data",(req,res)=>{
@@ -51,11 +47,13 @@ app.get("/emp_data",(req,res)=>{
         if(err){
             console.log(err);
         }else{
-           // res.send(result);
+            //res.send(result);
+            
            data=JSON.parse(JSON.stringify(result));
            console.log(data);
+           res.send(data);
            console.log(data[1]);
-        }
+         }
     });
 })
 
