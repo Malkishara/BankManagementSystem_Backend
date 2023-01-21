@@ -39,9 +39,7 @@ app.get("/login",(req,res)=>{
     });
 })
 
-app.get("/",(req,res)=>{
-    res.json({"users":["user1","user2","user3"]})
-})
+
 
 app.get("/emp_data",(req,res)=>{
     con.query("SELECT emp_id, emp_name, emp_email, emp_photo, emp_address, branch_name,bank_name FROM employee,bank_branch,bank WHERE employee.branch_id=bank_branch.branch_id AND bank_branch.bank_id=bank.bank_id",function(err,result,fields){
